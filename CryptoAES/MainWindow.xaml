@@ -1,0 +1,176 @@
+﻿<Window x:Class="CryptoAES.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+
+        Title="CryptoSharp" Height="590" Width="400" Visibility="Visible" Icon="icon2.ico">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <materialDesign:ColorZone
+            Mode="PrimaryMid"
+            Padding="16">
+
+            <DockPanel>
+                <TextBlock
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Style="{StaticResource MaterialDesignSubheadingTextBlock}"
+                    Margin="16 0 0 0">
+                    AES - encodage / décodage
+                </TextBlock>
+
+                <ToggleButton Click="ToggleDarkMode"
+                              HorizontalAlignment="Right"
+                              Style="{StaticResource MaterialDesignActionDarkToggleButton}"
+                              ToolTip="Toggle Dark/Light theme">
+                    <ToggleButton.Content>
+                        <materialDesign:PackIcon
+                            Kind="LightbulbOn" />
+                    </ToggleButton.Content>
+                    <materialDesign:ToggleButtonAssist.OnContent>
+                        <materialDesign:PackIcon
+                            Kind="LightbulbOutline" />
+                    </materialDesign:ToggleButtonAssist.OnContent>
+                </ToggleButton>
+
+
+            </DockPanel>
+
+        </materialDesign:ColorZone>
+
+        <Grid Grid.Row="1" Margin="16" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="1">
+
+                <TextBox
+                    Text="{Binding Key, ValidatesOnDataErrors=True}"
+                    Margin="0 0 0 18"
+                    Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                    materialDesign:HintAssist.Hint="Clé d'encodage" />
+
+                <TextBox
+                    Text="{Binding Input}"
+                    Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                    Height="100"
+                    AcceptsReturn="True"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    materialDesign:HintAssist.Hint="Chaine de caractère à (dé)coder" />
+
+            </StackPanel>
+
+            <Grid
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="0 18 0 0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Button
+                    MaxWidth="250"
+                    Click="Decrypt"
+                    Grid.Column="0"
+                    Height="48"
+                    Margin="0 0 16 0"
+                    ToolTip="Decrypt">
+                    <TextBlock>
+                        <materialDesign:PackIcon Kind="LockOpenOutline" />
+                        Décoder
+                    </TextBlock>
+                </Button>
+
+                <Button
+                    MaxWidth="250"
+                    Click="Encrypt"
+                    Grid.Column="1"
+                    Height="48"
+                    Margin="16 0 0 0"
+                    ToolTip="Encrypt">
+                    <TextBlock>
+                        <materialDesign:PackIcon Kind="LockOutline" />
+                        Encoder
+                    </TextBlock>
+                </Button>
+
+            </Grid>
+
+            <Separator
+                Grid.Row="3"
+                Margin="0 18" />
+
+            <materialDesign:Card
+                VerticalAlignment="Stretch"
+                Grid.Row="4"
+                Padding="8">
+
+                <Grid
+                    Margin="16 16 12 8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" MinHeight="80" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"
+                               Style="{StaticResource MaterialDesignButtonTextBlock}">
+                        Résultat :
+                    </TextBlock>
+
+                    <TextBox
+                        Grid.Row="1"
+                        Text="{Binding Output}"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        TextWrapping="Wrap"
+                        AcceptsReturn="True"
+                        VerticalScrollBarVisibility="Auto"
+                        IsReadOnly="True" />
+
+
+                    <Button
+                        Grid.Row="2"
+                        VerticalAlignment="Bottom"
+                        Click="Copy"
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource MaterialDesignToolForegroundButton}"
+                        Width="Auto"
+                        materialDesign:RippleAssist.IsCentered="True">
+                        <TextBlock>
+                            <materialDesign:PackIcon Kind="ContentCopy" />
+                            Copier
+                        </TextBlock>
+                    </Button>
+                </Grid>
+
+            </materialDesign:Card>
+
+        </Grid>
+    </Grid>
+
+</Window>
